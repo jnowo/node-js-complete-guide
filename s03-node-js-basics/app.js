@@ -7,6 +7,7 @@
 
 //require can import any file, not just node modules
 const http = require('http');
+const fs = require('fs');
 /*
 function rqListener(req, res) {
 }
@@ -15,13 +16,21 @@ function rqListener(req, res) {
 //we don't need to define the function rqListener, we can just pass it as an anonymous function
 const server = http.createServer((req, res) => {
   const url = req.url;
-  if(url === '/') {
+  const method = req.method;
+  if (url === '/') {
     res.write('<html lang="en">');
     res.write('<head><title>Enter message</title></head>');
     res.write('<body><form action="/message" method="post"><input type="text" name="message"><button type="submit">Send</button> </form></body>');
     res.write('</html>');
     return res.end();
   }
+
+  if (url === '/message' && method === 'POST') {
+    fs.writeFileSync('message.txt', 'DUMMY');
+    res.writeHead(302, {'Location': '/'});
+    return res.end();
+  }
+
   console.log(req.url, req.method, req.headers);
   res.setHeader('Content-Type', 'text/html');
   res.write('<html lang="en">');
