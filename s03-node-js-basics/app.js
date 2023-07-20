@@ -20,13 +20,27 @@ const server = http.createServer((req, res) => {
   if (url === '/') {
     res.write('<html lang="en">');
     res.write('<head><title>Enter message</title></head>');
+    //form is taking all inputs as key-value pairs where the key is the name of the input and the value is the value of the input
     res.write('<body><form action="/message" method="post"><input type="text" name="message"><button type="submit">Send</button> </form></body>');
     res.write('</html>');
     return res.end();
   }
 
   if (url === '/message' && method === 'POST') {
-    fs.writeFileSync('message.txt', 'DUMMY');
+    const body = [];
+    req.on('data', (chunk) => {
+      console.log(chunk);
+      body.push(chunk);
+    }); //listen for specific event
+
+    //req.on is registering an function which will be executed in the future, when the event is triggered
+    req.on('end', () => {
+      const parsedBody = Buffer.concat(body).toString();
+      const message = parsedBody.split('=')[1];
+      //like a bus stop (Max)
+      //we need this to be synchronous because we want to write the file before we redirect the user
+      fs.writeFileSync('message.txt', message);
+    });
     res.writeHead(302, {'Location': '/'});
     return res.end();
   }
