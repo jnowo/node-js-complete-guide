@@ -4,7 +4,7 @@
 - to break out of the event loop, we can use process.exit()
 - createServer or req.on are examples of event listeners passed to function which
   will be executed in the future (important!) node.js use this pattern a lot
-
+- it is call as Event Driven Architecture (EDA)
 */
 
 
@@ -50,10 +50,16 @@ const server = http.createServer((req, res) => {
     return req.on('end', () => {
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1];
-      //like a bus stop (Max)
 
-      //we need this to be synchronous because we want to write the file before we redirect the user
-      fs.writeFileSync('message.txt', message);
+      /*like a bus stop (Max)
+      we need this to be synchronous because we want to write the file before we redirect the user
+      writeFileSync is blocking execution of code until it is done*/
+      // fs.writeFileSync('message.txt', message);
+
+      fs.writeFile('message.txt', message, (err) => {
+        res.writeHead(302, {'Location': '/'});
+        return res.end();
+      });
 
       /*
       - sending response doesn't mean that our event listener (code above) will stop executing
@@ -61,8 +67,8 @@ const server = http.createServer((req, res) => {
         it is inside the event listener which is not executed immediately
       - in this case in dev tools we don't see redirection code
       */
-      res.writeHead(302, {'Location': '/'});
-      return res.end();
+      // res.writeHead(302, {'Location': '/'});
+      // return res.end();
     });
 
   }
