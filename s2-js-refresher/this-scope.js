@@ -19,3 +19,7 @@ const person = {
 }
 
 person.greet();
+
+console.log(1 + 1 + "22");
+
+console.log("22" - 1 - 1);
