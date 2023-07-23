@@ -17,10 +17,6 @@ function rqListener(req, res) {
 */
 
 //we don't need to define the function rqListener, we can just pass it as an anonymous function
-const server = http.createServer((req, res) => {
-
-
-  // process.exit(); //this will exit the event loop
-});
+const server = http.createServer(routes.handler);
 
 server.listen(3000);

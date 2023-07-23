@@ -73,7 +73,7 @@ const requestHandler = (req, res) => {
 
 //this is global object in node.js. Node.js will check if this object is exported and if it is,
 //it will be available outside of this file
-module.exports = requestHandler;
+module.exports.handler = requestHandler;
 
 //if we need to export multiple things, we can do it like this:
 // module.exports = {
