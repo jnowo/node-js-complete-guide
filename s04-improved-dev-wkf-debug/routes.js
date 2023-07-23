@@ -9,7 +9,7 @@ const requestHandler = (req, res) => {
     res.write('<html lang="en">');
     res.write('<head><title>Enter message</title></head>');
     //form is taking all inputs as key-value pairs where the key is the name of the input and the value is the value of the input
-    res.write('<body><form action="/message" method="post"><input type="text" name="message"><button type="submit">Send</button> </form></body>');
+    res.write('<body><form action="/message" method="post"><input type="text" name="message"><button type="submit">Send to server</button> </form></body>');
     res.write('</html>');
     return res.end();
   }
