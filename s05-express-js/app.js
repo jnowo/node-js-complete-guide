@@ -6,6 +6,7 @@ const path = require('path');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //filtering routes, only requests starting with /admin will be handled by adminRoutes
 app.use('/admin', adminRoutes);
