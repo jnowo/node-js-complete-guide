@@ -4,10 +4,16 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
-app.use(adminRoutes);
-app.use(shopRoutes);
 app.use(bodyParser.urlencoded({extended: false}));
 
+
+app.use(adminRoutes);
+app.use(shopRoutes);
+
+app.use((req, res, next) => {
+  //send must be the last method
+  res.status(404).send('<h1>Page not found</h1>');
+});
 /*//next is a function which will be passed to anonymous function inside use
 app.use((req, res, next) => {
   console.log('In the middleware!');
