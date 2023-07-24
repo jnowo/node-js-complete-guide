@@ -6,8 +6,8 @@ const shopRoutes = require('./routes/shop');
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 
-
-app.use(adminRoutes);
+//filtering routes, only requests starting with /admin will be handled by adminRoutes
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
