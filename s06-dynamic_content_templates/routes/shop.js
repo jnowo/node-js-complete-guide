@@ -1,14 +1,14 @@
 const express = require('express');
 const path = require('path');
-
+const adminData = require('./admin');
 const rootDir = require('../utils/path');
 
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  //join detects operating system and creates correct path
-  //__dirname is a global variable which holds the absolute path to the project folder
+  //in this case, data is shared between all users, which is not good
+  console.log('shop.ja', adminData.products);
   res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 });
 
