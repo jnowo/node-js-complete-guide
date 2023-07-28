@@ -17,7 +17,7 @@ app.use(shopRoutes);
 
 app.use((req, res, next) => {
   //send must be the last method
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  res.status(404).render('404', {pageTitle: 'Page not found'});
 });
 /*//next is a function which will be passed to anonymous function inside use
 app.use((req, res, next) => {
