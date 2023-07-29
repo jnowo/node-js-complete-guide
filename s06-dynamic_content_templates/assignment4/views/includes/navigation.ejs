@@ -1,0 +1,10 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__list">
+            <li class="main-header__list-item <%= path === '/' ? 'active' : '' %>"><a
+                        class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a></li>
+            <li class="main-header__list-item <%= path === '/users' ? 'active' : '' %>"><a
+                        class="<%= path === '/users' ? 'active' : '' %>" href="/users">Users</a></li>
+        </ul>
+    </nav>
+</header>
