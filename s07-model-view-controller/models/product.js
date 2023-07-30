@@ -21,13 +21,13 @@ module.exports = class Product {
     });
   }
 
-  static fetchAll() {
+  static async fetchAll(callback) {
     const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
-    fs.readFile(p, (err, fileContent) => {
+    await fs.readFile(p, (err, fileContent) => {
       if (err) {
-        return [];
+        callback([]);
       }
-      return JSON.parse(fileContent);
+      callback(JSON.parse(fileContent));
     });
   }
 }
